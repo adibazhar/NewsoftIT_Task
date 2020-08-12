@@ -16,7 +16,7 @@ class PostAdapter:PagedListAdapter<Post, PostAdapter.ItemViewHolder>(
 ) {
 
     private var listener : OnEventClickListener? = null
-    private var state:State? = null
+
     companion object {
         private val DiffCallback = object :DiffUtil.ItemCallback<Post>() {
             override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
@@ -36,16 +36,9 @@ class PostAdapter:PagedListAdapter<Post, PostAdapter.ItemViewHolder>(
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val currentPost = getItem(position)!!
 
-        state?.let {
-            holder.bind(it)
-        }
 
         holder.tv_title.text = currentPost.title
         holder.tv_body.text = currentPost.message
-    }
-
-    fun setLoadingState(state: State){
-        this.state = state
     }
 
     inner class ItemViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
@@ -59,9 +52,6 @@ class PostAdapter:PagedListAdapter<Post, PostAdapter.ItemViewHolder>(
             }
         }
 
-        fun bind(state: State){
-
-        }
 
         val tv_title = itemView.tv_title
         val tv_body = itemView.tv_body
